@@ -1,5 +1,5 @@
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { startGame } from '../apis/game';
 import GameCard from "./GameCard";
 
@@ -50,7 +50,7 @@ function Game() {
         if(lock || isFlipped(i, j)) {
             return;
         }
-        
+
     }
 
     if( loading ) {

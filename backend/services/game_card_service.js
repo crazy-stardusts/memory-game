@@ -1,4 +1,5 @@
 import config from "../config/config.js";
+import { BadRequestError } from "../middlewares/errorHandler.js";
 import db from "../models/index.js";
 class GameCardService {
 
@@ -31,6 +32,35 @@ class GameCardService {
         }
         
         return db.GameCard.bulkCreate(gameCards);
+    }
+
+    async getGameCard(gameId, positionX, positionY) {
+        const gameCard = await db.GameCard.findOne({
+            where: {
+                game_id: gameId,
+                position_x: positionX,
+                position_y: positionY
+            },
+            include: [{
+                model: db.Card
+            }]
+        });
+        if (!gameCard) {
+            throw new BadRequestError("Card not found");
+        }
+        return gameCard;
+    }
+
+    async matchCards(gameCard1, gameCard2) {
+        if (gameCard1.card_id !== gameCard2.card_id) {
+            throw new Error("Cards do not match");
+        }
+        await db.GameCard.update({ is_matched: true }, {
+            where: {
+                id: [gameCard1.id, gameCard2.id]
+            }
+        });
+        return true;
     }
 }
 
