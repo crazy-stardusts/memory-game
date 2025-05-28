@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { getAllTheme } from '../apis/game'
 import ThemeBox from './ThemeBox';
 
@@ -6,6 +7,7 @@ function Theme() {
 
     const [themes, setThemes] = useState();
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect( () => {
         const fetchThemes = async () => {
@@ -23,6 +25,7 @@ function Theme() {
 
     function onClickTheme(themeId) {
         console.log("Selected theme:", themeId);
+        navigate('/game?themeId=' + themeId);
     }
 
     if (loading) {
