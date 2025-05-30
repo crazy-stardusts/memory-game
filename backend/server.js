@@ -19,8 +19,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Routes
-app.use('/themes', themeRouter);
-app.use('/game', gameRouter)
+app.use('/api/themes', themeRouter);
+app.use('/api/game', gameRouter)
 
 app.use(errorHandler);
 

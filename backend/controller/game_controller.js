@@ -23,7 +23,7 @@ class GameController {
         if (!moveResult) {
             return res.status(404).json({ error: "Game not found or move invalid" });
         }
-        res.status(200).json({isMatched : moveResult});
+        res.status(200).json(moveResult);
     }
 
     async getGameSummary(req, res) {

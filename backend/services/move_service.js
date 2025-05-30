@@ -5,12 +5,12 @@ import { BadRequestError } from '../middlewares/errorHandler.js';
 class MoveService{
     async registerMove(gameCard) {
 
-        const moveCount = await this.getMoveCount(gameCard.game_id);
+        const moveCount = await this.getMoveCount(gameCard.game_id) + 1;
 
         if(gameCard.is_matched) throw new BadRequestError("Cannot register move for a matched card");
         if (moveCount % 2 === 1) {
             await this.createMove(gameCard.id, false);
-            return false;
+            return 'first_move';
         }
 
         const lastMove = await this.getLastMove(gameCard.game_id);

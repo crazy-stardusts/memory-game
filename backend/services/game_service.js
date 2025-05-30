@@ -1,4 +1,4 @@
-import { config } from "dotenv";
+import config from "../config/config.js";
 import db from "../models/index.js";
 import CardService from "./card_service.js";
 import GameCardService from "./game_card_service.js";
@@ -26,12 +26,12 @@ class GameService {
         }
         const gameCard = await GameCardService.getGameCard(gameId, x, y);
         const isMatched =  await MoveService.registerMove(gameCard);
-        if(isMatched) {
+        if(isMatched === true) {
             game.score += 2;
             await game.save();
         }
         return {
-            completed: false,
+            completed: game.score === config.grid_size * config.grid_size,
             score: game.score,
             isMatched: isMatched,
             gameCard: gameCard 

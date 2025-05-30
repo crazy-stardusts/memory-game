@@ -19,13 +19,13 @@ class GameCardService {
         for(let i = 0; i < noTiles; i++) {
 
             let card = await this.getRandomCard(cards);
-            while (cardCount[card.id] > config.max_repition_cards_per_game) {
+            while (cardCount[card.id] >= config.max_repition_cards_per_game) {
                 card = await this.getRandomCard(cards);
             }
             cardCount[card.id] = (cardCount[card.id] || 0) + 1;
             gameCards.push({
                 game_id: gameId,
-                card_id: cards[i % cards.length].id, 
+                card_id: card.id, 
                 position_x: i % config.grid_size,
                 position_y: Math.floor(i / config.grid_size),
             });
