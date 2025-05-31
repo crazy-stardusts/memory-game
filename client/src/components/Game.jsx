@@ -2,6 +2,9 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
 import { startGame, makeMove } from '../apis/game.js';
 import GameCard from "./GameCard";
+import GameSummary from "./GameSummary.jsx";
+import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
 
 const gridSize = 6;
 
@@ -17,6 +20,8 @@ function Game() {
   const [isRevealed, setIsRevealed] = useState({});
   const [gameData, setGameData] = useState(null);
   const [score, setScore] = useState(0);
+  const [theme, setTheme] = useState(null);
+  const [showSummary, setShowSummary] = useState(false);
 
 
 
@@ -26,6 +31,7 @@ function Game() {
         try {
             const data = await startGame(themeId);
             console.log("Game started with theme:", data);
+            setTheme(data.Theme);
             setGameData(data);
             setBoard(Array(gridSize).fill(null).map(() => Array(gridSize).fill(null)));
         }
@@ -94,8 +100,7 @@ function Game() {
           setScore(data.score);
 
           if(data.completed) {
-            alert("Congratulations! You've completed the game!");
-            navigate(`/summary?gameId=${gameData.id}`);
+            setShowSummary(true);
           }
 
 
@@ -109,19 +114,21 @@ function Game() {
         return <div>Loading...</div>;
     }
     return (
-      <div className="text-center my-4">
-        <div className="mt-4">
-          <p className="text-lg font-semibold">Score: {score}</p>
-        </div>
-        <div className="grid grid-cols-6 gap-2 max-w-xl mx-auto">
-            {board.flatMap((row, i) =>
-                row.map((_, j) => (
-                <GameCard key={`${i}-${j}`} card={board[i][j]} isFlipped={isFlipped(i, j)} onClick={() => handleMove(i, j)}
-          />
-        ))
-      )}
-      </div>
+      <div>
+        <Header color={theme?.color}/>
 
+        <div className="mt-14 mb-4">
+          <div className="grid grid-cols-4 sm:grid-cols-6 gap-x-1 gap-y-4 sm:gap-x-2 sm:gap-y-2 w-72 sm:w-10/12 max-w-3xl mx-auto">
+              {board.flatMap((row, i) =>
+                  row.map((_, j) => (
+                  <GameCard key={`${i}-${j}`} card={board[i][j]} isFlipped={isFlipped(i, j)} onClick={() => handleMove(i, j)} color={theme?.color} iconUrl={theme?.icon_url} themeName={theme?.name}/>
+                ))
+              )}
+          </div>
+        </div>
+
+        <Footer score={score} />
+        { showSummary && <GameSummary onClose={() => setShowSummary(false)} gameId={gameData?.id} color={theme?.color}/>}
       </div>
     )
 }

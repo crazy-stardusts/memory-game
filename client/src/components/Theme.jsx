@@ -32,15 +32,47 @@ function Theme() {
         return <div>Loading...</div>;
     }
     return (
-        <div>
-            <h1>Available Themes</h1>
-            <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-                {themes && themes.map((theme) => (
-                    <ThemeBox theme={theme} key={theme.id} onClick={() => onClickTheme(theme.id)} />
-                ))}
+        <div className='relative min-h-screen flex items-stretch bg-[#fdf8e6] overflow-hidden' >
+            <div className='absolute inset-0 z-0' >
+                <div className='w-full h-full clip-slant bg-white' />
             </div>
+            <div className='w-1/3 flex items-center justify-center z-10'>
+                <div className='text-center font-bold text-7xl leading-snug font-playpen higlight-stroke'>
+                    <p className='text-[#9EA4FF]'>Zap</p>
+                    <p className='text-[#FFE559]'>`n`</p>
+                    <p className='text-[#9EA4FF]'>Match</p>
+                </div>
+            </div>
+            <div className='w-2/3 flex items-center justify-center z-10'>
+                <div className='grid grid-cols-2 gap-4'>
+                    {themes && themes.map((theme) => (
+                        <ThemeBox theme={theme} key={theme.id} onClick={() => onClickTheme(theme.id)} />
+                    ))}
+                </div>
+            </div>  
         </div>
     );
 }
 
 export default Theme;
+
+/*
+
+            <div >
+
+
+            </div>
+            <div className='relative z-10 p-10 flex flex-col items-center md:flex-row gap-80'>
+                <div className='text-center md:text-left font-bold text-5xl leading-snug '>
+                    <p className='text-[#9EA4FF]'>Zap</p>
+                    <p className='text-[#FFE559]'>`n`</p>
+                    <p className='text-[#9EA4FF]'>Match</p>
+                </div>
+                <div className='grid grid-cols-2 gap-4'>
+                    {themes && themes.map((theme) => (
+                        <ThemeBox theme={theme} key={theme.id} onClick={() => onClickTheme(theme.id)} />
+                    ))}
+                </div>
+            </div>
+
+*/

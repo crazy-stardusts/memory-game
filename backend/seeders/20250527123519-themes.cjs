@@ -7,27 +7,32 @@ module.exports = {
       {
         id: '5d087d99-2e0e-4b36-b478-8d939fa94da4',
         name: 'Animals',
-        icon_url: 'https://example.com/icons/animals.png',
+        icon_url: 'Rabbit.png',
+        color: '#7DD13E',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: '21ea8db8-1f1e-42d1-8579-5b4a3daa8581',
         name: 'Fruits',
-        icon_url: 'https://example.com/icons/fruits.png',
+        icon_url: '8.png',
+        color: '#FFE559',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: '4b381df4-e3bb-4fec-8a3e-37c5156d32f0',
         name: 'Shapes',
+        icon_url: 'star.png',
+        color: '#FF7070',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        id: Sequelize.literal('uuid_generate_v4()'),
+        id: 'f2024882-30b7-4a01-88c0-3dbf7bb3a6f1',
         name: 'Monumnents',
-        icon_url: 'https://example.com/icons/colors.png',
+        icon_url: 'taj_bg.png',
+        color: '#53C3F8',
         createdAt: new Date(),
         updatedAt: new Date()
       }

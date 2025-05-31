@@ -16,6 +16,9 @@ const PORT = process.env.PORT || 3000;
 app.use(helmet());
 app.use(cors());
 app.use(morgan('dev'));
+
+// Serve static files
+app.use(express.static('public'));
 app.use(express.json());
 
 // Routes

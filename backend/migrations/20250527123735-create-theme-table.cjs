@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
+      color: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

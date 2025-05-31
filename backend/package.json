@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "cd ../client && npm run build && cd ../backend",
     "start": "node server.js",
     "dev": "node --watch server.js"
   },

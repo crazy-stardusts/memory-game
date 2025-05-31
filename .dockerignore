@@ -1,0 +1,7 @@
+node_monode_modules/
+.env
+.vscode/
+
+public/
+
+.git/

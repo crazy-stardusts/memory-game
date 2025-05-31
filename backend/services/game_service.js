@@ -3,14 +3,22 @@ import db from "../models/index.js";
 import CardService from "./card_service.js";
 import GameCardService from "./game_card_service.js";
 import MoveService from "./move_service.js";
+import ThemeService from "./theme_service.js";
 import { BadRequestError } from "../middlewares/errorHandler.js";
 
 class GameService {
     async startGame(themeId) {
         const cards = await CardService.getCardsByTheme(themeId)
-        const game = await db.Game.create({theme_id: themeId});
-        const gameCards = await GameCardService.createGameCards(game.id, cards);
-        return game
+        const gameId = (await db.Game.create({theme_id: themeId})).id;
+        // const theme = await ThemeService.getThemeById(themeId);
+        const gameCards = await GameCardService.createGameCards(gameId, cards);
+        const game = await db.Game.findByPk(gameId, {
+            include: [{
+                model: db.Theme
+            }]
+        });
+        // game.theme = theme;
+        return game;
     }
 
     async makeMove(gameId, x, y) {

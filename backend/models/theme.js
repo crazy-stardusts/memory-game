@@ -29,6 +29,10 @@ export default (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+        color: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     }, {
         sequelize,
         modelName: 'Theme',
