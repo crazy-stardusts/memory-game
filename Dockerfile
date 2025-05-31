@@ -10,10 +10,9 @@ WORKDIR /app
 COPY /backend ./backend/         
 COPY /client ./client/
 
-WORKDIR /app/backend
-RUN npm run build
-
-
+WORKDIR /app/client
+RUN npm install \
+    && npm run build
 
 FROM node:20-alpine AS runner
 
