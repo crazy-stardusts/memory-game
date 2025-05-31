@@ -12,7 +12,17 @@ const config = {
     grid_size: process.env.GRID_SIZE || 6,
     max_cards_per_game: process.env.MAX_CARDS_PER_GAME || 6,
     max_repition_cards_per_game: process.env.MAX_REPITION_CARDS_PER_GAME || 6,
-  }
+  },
+  test: {
+    username: "postgres",
+    password: "postgres",
+    database: "test_database",
+    host: "localhost",
+    dialect: "postgres",
+    grid_size: 6,
+    max_cards_per_game: 6,
+    max_repition_cards_per_game: 6,
+  },
 };
 
 export default config[process.env.NODE_ENV || 'development'];

@@ -1,32 +1,10 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import themeRouter from './routes/theme_router.js';
+import app from "./app.js";
 import { sequelize } from './models/index.js';
-import gameRouter from './routes/game_router.js';
-import { errorHandler } from './middlewares/errorHandler.js';
-
+import dotenv from 'dotenv';
+import config from "./config/config.js";
 dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(helmet());
-app.use(cors());
-app.use(morgan('dev'));
-
-// Serve static files
-app.use(express.static('public'));
-app.use(express.json());
-
-// Routes
-app.use('/api/themes', themeRouter);
-app.use('/api/game', gameRouter)
-
-app.use(errorHandler);
-
+const PORT = config.port || 5000;
 sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

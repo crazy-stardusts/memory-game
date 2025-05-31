@@ -6,7 +6,8 @@
   "scripts": {
     "build": "cd ../client && npm run build && cd ../backend",
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test": "NODE_ENV=test mocha"
   },
   "author": "Shyam Agarwal",
   "license": "ISC",
@@ -22,6 +23,9 @@
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.6.3"
+    "chai": "^5.2.0",
+    "mocha": "^11.5.0",
+    "sequelize-cli": "^6.6.3",
+    "supertest": "^7.1.1"
   }
 }
