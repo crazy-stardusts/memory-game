@@ -21,8 +21,8 @@ WORKDIR /app
 
 COPY --from=builder /app/backend ./
 RUN npm install --production \
-    && npx sequelize db:migrate \
-    && npx sequelize db:seed:all || true
+    && npx sequelize-cli db:migrate \
+    && npx sequelize-cli db:seed:all || true
 
 EXPOSE 3000
 
